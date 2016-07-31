@@ -61,19 +61,19 @@ function Engine(canvasElement) {
         window.requestAnimationFrame(engine.draw);
         console.log("main draw");
         engine.context.clearRect(0, 0, engine.width, engine.height);
-
         engine.context.save();
+        var time = performance.now();
 
         if (engine.showGrid)
             engine.drawGrid();
 
         engine.roads.forEach(function (road) {
-            road.draw(engine.context);
+            road.draw(engine.context, time);
             engine.context.restore();
         });
 
         engine.cars.forEach(function (car) {
-            car.draw(engine.context);
+            car.draw(engine.context, time);
             engine.context.restore();
         });
     };

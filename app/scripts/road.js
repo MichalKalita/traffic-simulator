@@ -18,6 +18,10 @@ function Road() {
         }
     };
 
+    this.getLength = function () {
+        return Calc.px(Math.sqrt(Math.pow(road.start.x - road.end.x, 2) + Math.pow(road.start.y - road.end.y, 2)));
+    };
+
     this.draw = function (context) {
         context.beginPath();
         context.moveTo(Calc.px(this.start.x), Calc.px(this.start.y));
