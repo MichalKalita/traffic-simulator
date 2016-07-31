@@ -33,12 +33,40 @@ function Engine(canvasElement) {
         this.cars.push(car);
     };
 
+    this.showGrid = true;
+    this.drawGrid = function () {
+        var widthM = Calc.m(engine.width), heightM = Calc.m(engine.height);
+
+        var context = engine.context;
+
+        context.strokeStyle = "#ddd";
+        context.lineWidth = 1;
+
+        for (var left = 0; left < widthM; left += 5) {
+            context.beginPath();
+            context.moveTo(Calc.px(left), 0);
+            context.lineTo(Calc.px(left), engine.height);
+            context.stroke();
+        }
+
+        for (var top = 0; top < heightM; top += 5) {
+            context.beginPath();
+            context.moveTo(0, Calc.px(top));
+            context.lineTo(engine.width, Calc.px(top));
+            context.stroke();
+        }
+    };
+
     this.draw = function () {
         window.requestAnimationFrame(engine.draw);
         console.log("main draw");
         engine.context.clearRect(0, 0, engine.width, engine.height);
 
         engine.context.save();
+
+        if (engine.showGrid)
+            engine.drawGrid();
+
         engine.roads.forEach(function (road) {
             road.draw(engine.context);
             engine.context.restore();

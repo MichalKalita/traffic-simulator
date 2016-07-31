@@ -3,7 +3,6 @@
 function Road() {
     this.start = {x: 0, y: 0};
     this.end = {x: 0, y: 0};
-    this.maximalSpeed = 0; // unlimited
 
     var road = this;
 
@@ -23,6 +22,8 @@ function Road() {
         context.beginPath();
         context.moveTo(Calc.px(this.start.x), Calc.px(this.start.y));
         context.lineTo(Calc.px(this.end.x), Calc.px(this.end.y));
+        context.lineWidth = Calc.px(3);
+        context.strokeStyle = "#333";
         context.stroke();
     };
 }
