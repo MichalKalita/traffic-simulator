@@ -19,14 +19,6 @@ function Engine(canvasElement) {
     window.addEventListener("resize", this.resize);
     this.resize();
 
-    this.zoom = 10; // px per meter
-    this.getSizeInPx = function (meters) {
-        return meters * this.zoom;
-    };
-    this.getSizeInMeters = function (px) {
-        return px / this.zoom;
-    };
-
     this.roads = [];
     this.addRoad = function (road) {
         this.roads.push(road);

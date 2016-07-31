@@ -5,8 +5,8 @@ function run() {
     var engine = new Engine(canvas);
 
     var road = new Road();
-    road.start = {x: engine.width / 2, y: 0};
-    road.end = {x: engine.width / 2, y: engine.height};
+    road.start = {x: 10, y: 1};
+    road.end = {x: 10, y: 50};
 
     engine.addRoad(road);
 

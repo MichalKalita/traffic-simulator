@@ -14,15 +14,15 @@ function Road() {
      */
     this.getPosition = function (position) {
         return {
-            x: road.start.x * (1 - position) + (road.end.x * position),
-            y: road.start.y * (1 - position) + (road.end.y * position)
+            x: Calc.px(road.start.x) * (1 - position) + (Calc.px(road.end.x) * position),
+            y: Calc.px(road.start.y) * (1 - position) + (Calc.px(road.end.y) * position)
         }
     };
 
     this.draw = function (context) {
         context.beginPath();
-        context.moveTo(this.start.x, this.start.y);
-        context.lineTo(this.end.x, this.end.y);
+        context.moveTo(Calc.px(this.start.x), Calc.px(this.start.y));
+        context.lineTo(Calc.px(this.end.x), Calc.px(this.end.y));
         context.stroke();
     };
 }

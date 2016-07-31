@@ -5,8 +5,8 @@ function Car() {
     this.road = null;
     this.position = 0;
 
-    this.width = 20; // px
-    this.height = 30; // px
+    this.width = 1.8; // meters
+    this.length = 4.5; // meters
 
     this.style = null;
 
@@ -14,6 +14,8 @@ function Car() {
 
     this.draw = function (context) {
         car.position += 0.005;
+
+        var width = Calc.px(car.width), length = Calc.px(car.length);
 
         if (car.position > 1) {
             car.position = 0.0;
@@ -23,10 +25,10 @@ function Car() {
 
         context.fillStyle = car.style;
         context.fillRect(
-            position.x - car.width / 2,
-            position.y - car.height / 2,
-            car.width,
-            car.height
+            position.x - width / 2,
+            position.y - length / 2,
+            width,
+            length
         );
     }
 }
