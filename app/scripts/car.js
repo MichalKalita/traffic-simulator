@@ -27,13 +27,11 @@ function Car() {
         var position = car.road.getPosition(car.position);
 
         var width = Calc.px(car.width), length = Calc.px(car.length);
+        context.translate(position.x, position.y);
+        context.rotate(position.angle);
         context.fillStyle = car.style;
-        context.fillRect(
-            position.x - width / 2,
-            position.y - length / 2,
-            width,
-            length
-        );
+        context.fillRect(-length / 2, -width / 2, length, width);
+        context.setTransform(1, 0, 0, 1, 0, 0);
         car.lastTime = time;
     }
 }

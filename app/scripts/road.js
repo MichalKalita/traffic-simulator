@@ -4,6 +4,8 @@ function Road() {
     this.start = {x: 0, y: 0};
     this.end = {x: 0, y: 0};
 
+    this._length = null;
+
     var road = this;
 
     /**
@@ -14,12 +16,19 @@ function Road() {
     this.getPosition = function (position) {
         return {
             x: Calc.px(road.start.x) * (1 - position) + (Calc.px(road.end.x) * position),
-            y: Calc.px(road.start.y) * (1 - position) + (Calc.px(road.end.y) * position)
+            y: Calc.px(road.start.y) * (1 - position) + (Calc.px(road.end.y) * position),
+            angle: Math.atan2(road.end.y - road.start.y, road.end.x - road.start.x)
         }
     };
 
     this.getLength = function () {
-        return Calc.px(Math.sqrt(Math.pow(road.start.x - road.end.x, 2) + Math.pow(road.start.y - road.end.y, 2)));
+        if (road._length == null) {
+            road._length = Math.sqrt(
+                Math.pow(road.start.x - road.end.x, 2) +
+                Math.pow(road.start.y - road.end.y, 2)
+            );
+        }
+        return Calc.px(road._length);
     };
 
     this.draw = function (context) {
