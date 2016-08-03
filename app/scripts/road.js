@@ -5,6 +5,7 @@ function Road() {
     this.end = {x: 0, y: 0};
 
     this._length = null;
+    this.next = null;
 
     var road = this;
 

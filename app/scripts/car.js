@@ -2,6 +2,7 @@
 
 function Car() {
 
+    this.startRoad = null;
     this.road = null;
     this.position = 0;
 
@@ -15,13 +16,22 @@ function Car() {
     var car = this;
 
     this.draw = function (context, time) {
+        if (car.road == null)
+            car.road = car.startRoad;
         if (car.lastTime != null) {
             var deltaTime = (time - car.lastTime) / 1000;
             car.position += (Calc.pxps(car.speed) * deltaTime) / car.road.getLength();
         }
 
         if (car.position > 1) {
-            car.position = 0.0;
+            if (car.road.next != null) { // road has continue
+                var over = (car.position - 1) * car.road.getLength();
+                car.road = car.road.next;
+                car.position = over / car.road.getLength();
+            } else {
+                car.position = 0.0;
+                car.road = car.startRoad;
+            }
         }
 
         var position = car.road.getPosition(car.position);
