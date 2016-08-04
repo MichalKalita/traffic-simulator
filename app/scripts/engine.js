@@ -10,6 +10,8 @@ function Engine(canvasElement) {
 
     var engine = this;
 
+    this.navigator = new Navigator(this);
+
     this.context = canvasElement.getContext("2d");
 
     this.resize = function () {
@@ -58,8 +60,6 @@ function Engine(canvasElement) {
     };
 
     this.draw = function () {
-        window.requestAnimationFrame(engine.draw);
-        console.log("main draw");
         engine.context.clearRect(0, 0, engine.width, engine.height);
         engine.context.save();
         var time = performance.now();
@@ -68,13 +68,14 @@ function Engine(canvasElement) {
             engine.drawGrid();
 
         engine.roads.forEach(function (road) {
-            road.draw(engine.context, time);
+            road.draw(engine.context, time, engine);
             engine.context.restore();
         });
 
         engine.cars.forEach(function (car) {
-            car.draw(engine.context, time);
+            car.draw(engine.context, time, engine);
             engine.context.restore();
         });
+        window.requestAnimationFrame(engine.draw);
     };
 }
